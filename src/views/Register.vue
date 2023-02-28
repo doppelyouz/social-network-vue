@@ -16,7 +16,7 @@
                         <fieldset class="form-group">
                             <input type="text" class="form-control form-control-lg" placeholder="password">
                         </fieldset>
-                        <button class="btn btn-lg btn-primary pull-xs-right">Sign up</button>
+                        <button class="btn btn-lg btn-primary pull-xs-right" :disabled="isSubmitting">Sign up</button>
                     </form>
                 </div>
             </div>
@@ -27,9 +27,15 @@
 <script>
     export default {
         name: "AppRegister",
+        computed: {
+            isSubmitting() {
+                return this.$store.state.auth.isSubmitting;
+            }
+        },
         methods: {
             onSubmit() {
                 console.log("submitted form");
+                this.$store.commit('registerStart');
             }
         }
     }
