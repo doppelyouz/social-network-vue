@@ -5,7 +5,7 @@
                 <div class="col-md-6 offset-md-3 col-xs-12">
                     <h1 class="text-xs-center">Sign up</h1>
                     <p class="text-xs-center"><router-link to="/login"> Need an account? </router-link></p>
-                    VALIDATION ERRORS
+                    <AppValidationErrors v-if="validationErrors" :validationErrors="validationErrors" />
                     <form @submit.prevent="onSubmit">
                         <fieldset class="form-group">
                             <input type="text" class="form-control form-control-lg" placeholder="username" v-model="username">
@@ -25,8 +25,12 @@
 </template>
 
 <script>
+    import AppValidationErrors from '@/components/ValidationErrors';
     export default {
         name: "AppRegister",
+        components: {
+            AppValidationErrors
+        },
         data() {
             return {
                 email: '',
@@ -36,7 +40,10 @@
         },
         computed: {
             isSubmitting() {
-                return this.$store.state.auth.isSubmitting;
+                return this.$store.state.auth.isSubmitting
+            },
+            validationErrors() {
+                return this.$store.state.auth.validationErrors
             }
         },
         methods: {
