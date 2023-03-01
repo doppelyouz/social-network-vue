@@ -8,13 +8,13 @@
                     VALIDATION ERRORS
                     <form @submit.prevent="onSubmit">
                         <fieldset class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="username">
+                            <input type="text" class="form-control form-control-lg" placeholder="username" v-model="username">
                         </fieldset>
                         <fieldset class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="email">
+                            <input type="text" class="form-control form-control-lg" placeholder="email" v-model="email">
                         </fieldset>
                         <fieldset class="form-group">
-                            <input type="text" class="form-control form-control-lg" placeholder="password">
+                            <input type="text" class="form-control form-control-lg" placeholder="password" v-model="password">
                         </fieldset>
                         <button class="btn btn-lg btn-primary pull-xs-right" :disabled="isSubmitting">Sign up</button>
                     </form>
@@ -27,6 +27,13 @@
 <script>
     export default {
         name: "AppRegister",
+        data() {
+            return {
+                email: '',
+                password: '',
+                username: ''
+            }
+        },
         computed: {
             isSubmitting() {
                 return this.$store.state.auth.isSubmitting;
@@ -35,7 +42,15 @@
         methods: {
             onSubmit() {
                 console.log("submitted form");
-                this.$store.commit('registerStart');
+                this.$store.dispatch('register', {
+                    email: this.email,
+                    password: this.password,
+                    username: this.username
+                })
+                .then(user => {
+                    console.log('successfully register user', user);
+                    this.$router.push({name: 'home'})
+                });
             }
         }
     }
