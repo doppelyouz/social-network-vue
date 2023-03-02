@@ -8,34 +8,44 @@ const state = {
     isLoggedIn: null
 }
 
+export const mutationsTypes = {
+    registerStart: '[auth] registerStart',
+    registerSuccess: '[auth] registerSuccess',
+    registerFailure: '[auth] registerFailure',
+}
+
 const mutations = {
-    registerStart(state) {
+    [mutationsTypes.registerStart](state) {
         state.isSubmitting = true;
         state.validationErrors = null;
     },
-    registerSuccess(state, payload) {
+    [mutationsTypes.registerSuccess](state, payload) {
         state.isSubmitting = false;
         state.currentUser = payload;
         state.isLoggedIn = true;
     },
-    registerFailure(state, payload) {
+    [mutationsTypes.registerFailure](state, payload) {
         state.isSubmitting = false;
         state.validationErrors = payload;
     }
 }
 
+export const actionsTypes = {
+    register: '[auth] register'
+}
+
 const actions = {
-    register(context, credentials) {
+    [actionsTypes.register](context, credentials) {
         return new Promise(resolve => {
-            context.commit("registerStart")
+            context.commit(mutationsTypes.registerStart)
             authApi.register(credentials)
                     .then(response => {
-                        context.commit("registerSuccess", response.data.user)
+                        context.commit(mutationsTypes.registerSuccess, response.data.user)
                         setItem('accessToken', response.data.user.token)
                         resolve(response.data.user)
                     })
                     .catch(result => {
-                        context.commit("registerFailure", result.response.data.errors)
+                        context.commit(mutationsTypes.registerFailure, result.response.data.errors)
                     })
         })
     }
