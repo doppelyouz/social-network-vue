@@ -7,11 +7,15 @@
 
 <script>
   import AppTopbar from '@/components/Topbar.vue';
+  import {actionsTypes} from '@/store/modules/auth';
 
   export default {
     name: 'App',
     components: {
       AppTopbar
+    },
+    mounted() {
+      this.$store.dispatch(actionsTypes.getCurrentUser);
     }
   };
 </script>

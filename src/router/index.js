@@ -18,6 +18,18 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/createArticle',
+    name: 'createArticle'
+  },
+  {
+    path: '/settings',
+    name: 'settings'
+  },
+  {
+    path: '/profile',
+    name: 'profile'
   }
 ]
 
