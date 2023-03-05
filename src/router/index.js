@@ -30,6 +30,30 @@ const routes = [
   {
     path: '/profile',
     name: 'profile'
+  },
+  {
+    path: '/article',
+    name: 'article'
+  },
+  {
+    path: '/feed',
+    name: 'yourFeed'
+  },
+  {
+    path: '/articles/:slug',
+    name: 'article'
+  },
+  {
+    path: '/articles/:slug/edit',
+    name: 'editArticle'
+  },
+  {
+    path: '/profiles/:slug',
+    name: 'profile'
+  },
+  {
+    path: '/profiles/:slug/favorites',
+    name: 'profileFavorites'
   }
 ]
 
