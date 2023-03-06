@@ -21,7 +21,7 @@
                     Tag list
                 </router-link>
             </div>
-            Pagination
+            <AppPagination :total="total" :limit="limit" :currentPage="currentPage" :url="url" />
         </div>
     </div>
 </template>
@@ -29,12 +29,22 @@
 <script>
     import { mapState } from 'vuex';
     import { actionsTypes } from '@/store/modules/feed';
+    import AppPagination from '@/components/Pagination';
+
     export default {
         name: 'AppFeed',
         props: {
             apiUrl: {
                 type: String, 
                 required: true
+            }
+        },
+        data() {
+            return {
+                total: 500,
+                limit: 10,
+                currentPage: 5,
+                url: '/'
             }
         },
         computed: {
@@ -46,6 +56,9 @@
         },
         mounted() {
             this.$store.dispatch(actionsTypes.getFeed, {apiUrl: this.apiUrl})
+        },
+        components: {
+            AppPagination
         }
     }
 </script>
