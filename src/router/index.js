@@ -40,6 +40,10 @@ const routes = [
     name: 'yourFeed'
   },
   {
+    path: '/articles',
+    name: 'articles'
+  },
+  {
     path: '/articles/:slug',
     name: 'article'
   },

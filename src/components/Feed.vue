@@ -21,7 +21,7 @@
                     Tag list
                 </router-link>
             </div>
-            <AppPagination :total="total" :limit="limit" :currentPage="currentPage" :url="url" />
+            <AppPagination :total="feed.articlesCount" :limit="limit" :currentPage="currentPage" :url="baseUrl" />
         </div>
     </div>
 </template>
@@ -30,6 +30,8 @@
     import { mapState } from 'vuex';
     import { actionsTypes } from '@/store/modules/feed';
     import AppPagination from '@/components/Pagination';
+    import { limit } from '@/helpers/vars';
+    import {stringify, parseUrl} from 'query-string'
 
     export default {
         name: 'AppFeed',
@@ -41,10 +43,7 @@
         },
         data() {
             return {
-                total: 500,
-                limit: 10,
-                currentPage: 5,
-                url: '/'
+                limit
             }
         },
         computed: {
@@ -52,10 +51,36 @@
                 isLoading: state => state.feed.isLoading,
                 feed: state => state.feed.data,
                 error: state => state.feed.error,
-            })
+            }),
+            currentPage() {
+                return Number(this.$route.query.page || "1")
+            },
+            baseUrl() {
+                return this.$route.path
+            },
+            offset() {
+                return this.currentPage * limit - limit;
+            }
+        },
+        watch: {
+            currentPage() {
+                this.fetchFeed();
+            }
         },
         mounted() {
-            this.$store.dispatch(actionsTypes.getFeed, {apiUrl: this.apiUrl})
+            this.fetchFeed();
+        },
+        methods: {
+            fetchFeed() {
+                const parsedUrl = parseUrl(this.apiUrl)
+                const stringifiedParams = stringify({
+                    limit,
+                    offset: this.offset,
+                    ...parsedUrl.query
+                })
+                const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
+                this.$store.dispatch(actionsTypes.getFeed, {apiUrl: apiUrlWithParams})
+            }
         },
         components: {
             AppPagination
