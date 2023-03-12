@@ -4,7 +4,7 @@
         <div class="container page">
             <div class="row">
                 <div class="col-md-9">
-                    <FeedToggler />
+                    <FeedToggler :tagName="tagName"/>
                     <Feed :apiUrl="apiUrl"/>
                 </div>
                 <div class="col-md-3">
@@ -21,16 +21,19 @@
     import Banner from '@/components/Banner.vue';
     import FeedToggler from '@/components/FeedToggler.vue';
     export default {
-        name: 'AppGlobalFeed',
+        name: 'AppTagFeed',
         components: {
             PopularTags,
             Feed,
             Banner,
             FeedToggler
         },
-        data() {
-            return {
-                apiUrl: '/articles'
+        computed: {
+            tagName() {
+                return this.$route.params.slug;
+            },
+            apiUrl() {
+                return `/articles?tag=${this.tagName}`;
             }
         }
     }

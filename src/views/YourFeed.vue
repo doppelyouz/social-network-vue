@@ -19,9 +19,9 @@
     import Feed from '@/components/Feed.vue';
     import PopularTags from '@/components/PopularTags.vue';
     import Banner from '@/components/Banner.vue';
-    import FeedToggler from '@/components/FeedToggler.vue';
+    import FeedToggler from '../components/FeedToggler.vue';
     export default {
-        name: 'AppGlobalFeed',
+        name: 'AppYourFeed',
         components: {
             PopularTags,
             Feed,
@@ -30,7 +30,7 @@
         },
         data() {
             return {
-                apiUrl: '/articles'
+                apiUrl: '/articles/feed'
             }
         }
     }
