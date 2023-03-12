@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="isLoading">Loading...</div>
-        <div v-if="error">Something bad happened</div>
+        <Loading v-if="isLoading" />
+        <ErrorMessage v-if="error" />
         <div v-if="feed">
             <div class="article-preview" v-for="(article, index) in feed.articles" :key="index">
                 <div class="article-meta">
@@ -32,6 +32,8 @@
     import AppPagination from '@/components/Pagination';
     import { limit } from '@/helpers/vars';
     import {stringify, parseUrl} from 'query-string'
+    import Loading from './Loading.vue';
+    import ErrorMessage from './ErrorMessage.vue';
 
     export default {
         name: 'AppFeed',
@@ -83,7 +85,9 @@
             }
         },
         components: {
-            AppPagination
+            AppPagination,
+            Loading,
+            ErrorMessage
         }
     }
 </script>
