@@ -48,6 +48,10 @@ const routes = [
     name: 'article'
   },
   {
+    path: '/tag',
+    name: 'tag'
+  },
+  {
     path: '/articles/:slug/edit',
     name: 'editArticle'
   },
