@@ -1,46 +1,50 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <router-link class="navbar-brand" :to="{ name: 'globalFeed' }">
+      <router-link class="navbar-brand" :to="{name: 'globalFeed'}">
         doppelyouz
       </router-link>
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <router-link class="navbar-brand" :to="{ name: 'globalFeed' }" active-class="active" exact>Home</router-link>
+          <router-link class="nav-link" :to="{name: 'globalFeed'}"
+            >Home</router-link
+          >
         </li>
         <template v-if="isLoggedIn">
           <li class="nav-item">
-            <router-link class="navbar-brand" :to="{ name: 'createArticle' }" active-class="active">
-              <i class="ion-compose"></i> &nbsp; New Article
+            <router-link class="nav-link" :to="{name: 'createArticle'}">
+              <i class="ion-compose" />
+              &nbsp; New Article
             </router-link>
           </li>
+
           <li class="nav-item">
-            <router-link class="navbar-brand" :to="{ name: 'settings' }" active-class="active">
-              <i class="ion-gear-a"></i> &nbsp; Settings
+            <router-link class="nav-link" :to="{name: 'settings'}">
+              <i class="ion-gear-a" />
+              &nbsp; Settings
             </router-link>
           </li>
+
           <li class="nav-item">
-            <router-link class="navbar-brand" :to="{
-              name: 'profile',
-              params: { slug: currentUser.username },
-            }" active-class="active">
-              <div class="user-info">
-                <img :src="currentUser.image" class="user-pic" />
-                &nbsp;
-                <div class="username">{{ currentUser.username }}</div>
-              </div>
+            <router-link
+              class="nav-link"
+              :to="{name: 'profile', params: {slug: currentUser.username}}"
+            >
+              <img class="user-pic" :src="currentUser.image" />
+              &nbsp;
+              {{ currentUser.username }}
             </router-link>
           </li>
         </template>
         <template v-if="isAnonymous">
           <li class="nav-item">
-            <router-link class="navbar-brand" :to="{ name: 'login' }" active-class="active">
-              <i class="ion-compose"></i> &nbsp; Sign In
+            <router-link class="nav-link" :to="{name: 'login'}">
+              Sign in
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="navbar-brand" :to="{ name: 'register' }" active-class="active">
-              <i class="ion-gear-a"></i> &nbsp; Sign Up
+            <router-link class="nav-link" :to="{name: 'register'}">
+              Sign up
             </router-link>
           </li>
         </template>
@@ -50,31 +54,17 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { getterTypes } from "@/store/modules/auth";
+import {mapGetters} from 'vuex'
+import {getterTypes} from '@/store/modules/auth'
+
 export default {
-  name: "AppTopbar",
+  name: 'AppTopbar',
   computed: {
     ...mapGetters({
       currentUser: getterTypes.currentUser,
       isLoggedIn: getterTypes.isLoggedIn,
-      isAnonymous: getterTypes.isAnonymous,
-    }),
-  },
-};
+      isAnonymous: getterTypes.isAnonymous
+    })
+  }
+}
 </script>
-
-<style scoped>
-.user-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-pic {
-  max-width: 40px;
-  height: 40px;
-  width: 100%;
-  border-radius: 50%;
-}
-</style>
