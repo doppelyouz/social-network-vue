@@ -4,6 +4,7 @@ import YourFeed from "@/views/YourFeed";
 import TagFeed from "@/views/TagFeed";
 import Register from "@/views/Register";
 import Login from '@/views/Login';
+import Article from '@/views/Article';
 
 const routes = [
   {
@@ -22,10 +23,6 @@ const routes = [
     component: Login
   },
   {
-    path: '/createArticle',
-    name: 'createArticle'
-  },
-  {
     path: '/settings',
     name: 'settings'
   },
@@ -34,8 +31,8 @@ const routes = [
     name: 'profile'
   },
   {
-    path: '/article',
-    name: 'article'
+    path: '/articles/new',
+    name: 'createArticle'
   },
   {
     path: '/feed',
@@ -48,7 +45,8 @@ const routes = [
   },
   {
     path: '/articles/:slug',
-    name: 'article'
+    name: 'article',
+    component: Article
   },
   {
     path: '/tags/:slug',
