@@ -18,7 +18,7 @@
                     <h1>{{ article?.title }}</h1>
                     <p>{{ article?.description }}</p>
                     <span>Read more...</span>
-                    Tag list
+                    <TagList :tags="article.tagList" />
                 </router-link>
             </div>
             <AppPagination :total="feed.articlesCount" :limit="limit" :currentPage="currentPage" :url="baseUrl" />
@@ -34,6 +34,7 @@
     import {stringify, parseUrl} from 'query-string'
     import Loading from './Loading.vue';
     import ErrorMessage from './ErrorMessage.vue';
+    import TagList from './TagList.vue';
 
     export default {
         name: 'AppFeed',
@@ -87,7 +88,8 @@
         components: {
             AppPagination,
             Loading,
-            ErrorMessage
+            ErrorMessage,
+            TagList
         }
     }
 </script>

@@ -44,7 +44,7 @@
             <div>
               <p>{{ article.body }}</p>
             </div>
-            TAG LIST IS HERE
+            <TagList :tags="article.tagList" />
           </div>
         </div>
       </div>
@@ -58,12 +58,14 @@
   import { actionTypes as articleActionTypes} from '@/store/modules/article'
   import Loading from '@/components/Loading'
   import ErrorMessage from '@/components/ErrorMessage'
+  import TagList from '../components/TagList.vue'
   
   export default {
     name: 'AppArticle',
     components: {
       Loading,
-      ErrorMessage
+      ErrorMessage,
+      TagList
     },
     methods: {
       deleteArticle() {
