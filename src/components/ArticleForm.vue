@@ -3,7 +3,7 @@
         <div class="container page">
             <div class="row">
                 <div class="col-md-10 offset-md-1 col-xs-12">
-                    <ErrorMessage v-if="errors" />
+                    <ValidationErrors v-if="errors" :validation-errors="errors" />
                     <form @submit.prevent="onSubmit">
                         <fieldset>
                             <fieldset class="form-group">
@@ -29,7 +29,7 @@
     </div>
 </template>
 <script>
-    import ErrorMessage from './ErrorMessage.vue';
+    import ValidationErrors from '@/components/ValidationErrors.vue';
     export default {
         name: 'AppArticleForm',
         props: {
@@ -47,7 +47,7 @@
             },
         },
         components: {
-            ErrorMessage
+            ValidationErrors
         },
         data() {
             return {
@@ -63,7 +63,7 @@
                     title: this.title,
                     description: this.description,
                     body: this.body,
-                    tagList: this.tagList
+                    tagList: this.tagList.split(' ')
                 }
                 this.$emit('articleSubmit', form)
             }
