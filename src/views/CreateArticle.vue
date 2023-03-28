@@ -7,7 +7,7 @@
 <script>
     import { actionTypes } from '@/store/modules/createArticle';
     import { mapState } from 'vuex';
-    import ArticleForm from '../components/ArticleForm.vue';
+    import ArticleForm from '@/components/ArticleForm';
     export default {
         name: 'AppCreateArticle',
         components: {ArticleForm},

@@ -5,6 +5,7 @@ import feed from './modules/feed'
 import popularTags from './modules/popularTags'
 import article from './modules/article'
 import createArticle from './modules/createArticle'
+import editArticle from './modules/editArticle'
 
 export default createStore({
   state: {},
@@ -16,6 +17,7 @@ export default createStore({
     feed,
     popularTags,
     article,
-    createArticle
+    createArticle,
+    editArticle
   }
 })

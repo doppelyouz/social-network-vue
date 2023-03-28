@@ -73,7 +73,7 @@
           slug: this.$route.params.slug
         })
           .then(() => {
-            this.$router.push({name: 'GlobalFeed'})
+            this.$router.push({name: 'globalFeed'})
           })
       }
     },
