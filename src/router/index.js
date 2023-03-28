@@ -7,6 +7,7 @@ import Login from '@/views/Login';
 import Article from '@/views/Article';
 import CreateArticle from '@/views/CreateArticle';
 import EditArticle from '@/views/EditArticle';
+import Settings from '@/views/Settings';
 
 const routes = [
   {
@@ -26,7 +27,8 @@ const routes = [
   },
   {
     path: '/settings',
-    name: 'settings'
+    name: 'settings',
+    component: Settings
   },
   {
     path: '/profile',
