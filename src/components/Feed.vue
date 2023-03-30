@@ -12,7 +12,13 @@
                         <router-link :to="{name: 'profile', params: {slug: article?.author.username}}" class="author">{{article?.author.username}}</router-link>
                         <span class="date">{{ article?.createdAt }}</span>
                     </div>
-                    <div class="pull-xs-right">Add to favorites</div>
+                    <div class="pull-xs-right">
+                        <AddToFavorites 
+                            :isFavorited="article.favorited"
+                            :article-slug="article.slug"
+                            :favoritesCount="article.favoritesCount"
+                        />
+                    </div>
                 </div>
                 <router-link :to="{name: 'article', params: {slug: article?.slug}}" class="preview-link">
                     <h1>{{ article?.title }}</h1>
@@ -35,6 +41,7 @@
     import Loading from './Loading.vue';
     import ErrorMessage from './ErrorMessage.vue';
     import TagList from './TagList.vue';
+    import AddToFavorites from './AddToFavorites.vue';
 
     export default {
         name: 'AppFeed',
@@ -89,7 +96,8 @@
             AppPagination,
             Loading,
             ErrorMessage,
-            TagList
+            TagList,
+            AddToFavorites
         }
     }
 </script>
